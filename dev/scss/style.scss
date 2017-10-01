@@ -1,0 +1,169 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300);
+
+$color_1: #808080;
+$color_2: #333;
+$font_family_1: Helvetica, sans-serif;
+$background_color_1: #f9f9f9;
+$background_color_2: #43A19E;
+
+$color-border: #CDCDCD;
+$color-label: darken($color-border, 20%);
+$color-primary: #1695A3;
+
+.field {
+	display: block;
+	margin-bottom: 0.5rem;
+}
+
+div {
+	.halfContainer {
+		display: inline-block;
+		width: 50%;
+		height:100%;
+
+	}
+	.formItemContainer {
+		display: inline-block;
+		width: 10%;
+		text-align:center;
+	}
+
+	.componentContainer{
+		border: 1px solid $color-border;
+		margin: 5px;
+		text-align:center;
+	}
+
+	.Charts {
+		margin: 0 auto;
+		display: flex;
+		align-items: flex-end;
+		padding: 50px;
+	}
+	.Charts--series {
+		height: 100%;
+		margin: 0 30px 0 0;
+		display: inline-block;
+		flex: 1;
+		display: flex;
+		align-items: flex-end;
+		transform-origin: 0 100%;
+		position: relative;
+		border-bottom: 1px solid #c2c2c2;
+		label {
+			position: absolute;
+			left: 0;
+			right: 20px;
+			bottom: -25px;
+			font-family: $font_family_1;
+			font-size: 16px;
+			text-align: center;
+			color: $color_1;
+		}
+	}
+	.Charts--item {
+		display: inline-block;
+		margin: 0 0 0 0;
+		flex: 1;
+		position: relative;
+		text-align: center;
+		border-radius: 2px 2px 0 0;
+		b {
+			position: relative;
+			font-family: $font_family_1;
+			font-size: 12px;
+			top: -20px;
+			color: $color_2;
+		}
+	}
+
+}
+
+label {
+	display: block;
+	font-size: 0.8rem;
+	line-height: 1.4rem;
+	font-weight: 600;
+	color: $color-label;
+	text-align: center;
+}
+
+input[type="text"],
+input[type="email"],
+textarea,
+input:not([type]) {
+	appearance: none;
+	border: 1px solid $color-border;
+	font-size: 0.8rem;
+	padding: 0.5rem;
+	width: 50%;
+
+	&:focus {
+		outline: 2px solid $color-primary;
+	}
+}
+
+select {
+	border-radius: 0;
+	height: 2rem;
+	width: 100%;
+
+	&:focus {
+		border: 2px solid $color-primary;
+		outline: none;
+	}
+}
+
+button {
+	appearance: none;
+	padding: 1rem 2rem;
+	text-transform: uppercase;
+	font-size: 0.8rem;
+	background: $color-primary;
+	color: white;
+	border: none;
+	border-radius: 3px;
+	margin: 0.5rem 0;
+
+	&:hover {
+		opacity: 0.8;
+	}
+
+	&[type="reset"] {
+		color: $color-primary;
+		border: 1px solid $color-primary;
+		background: transparent;
+	}
+
+	+ button {
+		margin-left: 1rem;
+	}
+}
+
+*, *:before, *:after {
+	box-sizing: border-box;
+	position: relative;
+}
+
+body {
+	font-family: Lato, Helvetica, sans-serif;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: right;
+	justify-content: flex-start;
+
+	> #app {
+		flex: 1 0 30rem;
+		width: 30rem;
+		max-width: 100%;
+	}
+
+}
+
+body, html {
+	font-size: 16px;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
