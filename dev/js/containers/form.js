@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import SubmitButton from './btn-submit';
+import ResetButton from './btn-reset';
+
 
 
 class Form extends Component {
@@ -24,7 +26,7 @@ class Form extends Component {
                     {this.createFormItems()}
                 </div>
                 <SubmitButton />
-                <button> Reset </button>
+                <ResetButton />
             </div>
 
         );
