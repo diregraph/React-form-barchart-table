@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 class BarChart extends Component {
     render(){
         let self = this,
-            data = this.props.barChartData.data,
+            data = this.props.barChartData,
             colors = ['#F44336', '#673AB7', '#03A9F4', '#4CAF50', '#607D8B','#FF5722'],
             label = ['A','B','C','D','E','F']   ,
             max = 0;
@@ -19,9 +19,9 @@ class BarChart extends Component {
         return (
             <div className="Charts">
                 { data.map((item, itemIndex) => {
-                    var color = colors[itemIndex],
+                    let color = colors[itemIndex],
                         style,
-                        size = item /max * 100;
+                        size = item / max * 100;
                     style = {
                         backgroundColor: color,
                     };
@@ -53,7 +53,7 @@ class BarChart extends Component {
 
 function mapStateToProps(state) {
     return {
-        barChartData : state.barChartData
+        barChartData : state.formItems.amount
     };
 }
 

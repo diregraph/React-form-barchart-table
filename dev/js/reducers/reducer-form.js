@@ -1,34 +1,26 @@
-export default function () {
-    return [
-        {
-            id: 1,
-            type: "A",
-            amount: 10
-        },
-        {
-            id: 2,
-            type: "B",
-            amount: 15
-        },
-        {
-            id: 3,
-            type: "C",
-            amount: 20
-        },
-        {
-            id: 4,
-            type: "D",
-            amount: 10
-        },
-        {
-            id: 5,
-            type: "E",
-            amount: 5
-        },
-        {
-            id: 6,
-            type: "F",
-            amount: 15
-        }
-    ]
+export default function (state={
+                                id:[1,2,3,4,5,6],
+                                type:["A","B","C","D","E"],
+                                amount:[0,0,0,0,0,0]
+
+                                },action) {
+    switch(action.type){
+        case "SUBMIT_BUTTON_CLICKED":
+            return {
+                id:[1,2,3,4,5,6],
+                type:["A","B","C","D","E"],
+                amount:action.payload
+            };
+            return;
+            break;
+        case "RESET_BUTTON_CLICKED":
+            return{
+                id:[1,2,3,4,5,6],
+                type:["A","B","C","D","E"],
+                amount:action.payload
+            };
+            return;
+            break
+    }
+    return state
 }

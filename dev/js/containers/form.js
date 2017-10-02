@@ -10,30 +10,29 @@ import ResetButton from '../components/btn-reset';
 
 class Form extends Component {
 
-    createFormItems(){
-        return this.props.formItems.map((formItem) =>{
+    createFormItems(count){
+
+        return this.props.formItems.id.map((formItemID) =>{
+            count++;
             return (
-                <div key={formItem.id} className="formItemContainer">
-                    <label>{formItem.type}</label>
-                    <input defaultValue={formItem.amount} type="text" />
+                <div key={formItemID} className="formItemContainer">
+                    <label>{this.props.formItems.type[count]}</label>
+                    <input defaultValue={this.props.formItems.amount[count]} type="text" />
                 </div>
             );
+
         });
     }
 
     render() {
-        let formData = [];
-        this.props.formItems.map((formItem) => {
-            {formData.push(formItem.amount)}
-        });
         return(
             <div>
                 <div>
-                    {this.createFormItems()}
+                    {this.createFormItems(0)}
                 </div>
 
-                <SubmitButton submitAction ={() => this.props.submitForm(formData)} />
-                <ResetButton resetAction ={() => this.props.resetForm([1,1,1,1,1,1])}/>
+                <SubmitButton submitAction ={() => this.props.submitForm([5,1,4,5,3,1])} />
+                <ResetButton resetAction ={() => this.props.resetForm([0,0,0,0,0,0])}/>
             </div>
 
         );
