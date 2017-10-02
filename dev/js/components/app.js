@@ -10,7 +10,6 @@ const App = () => (
             <div className="componentContainer">
                 <h2>Form</h2>
                 <Form />
-
             </div>
 
             <div className="componentContainer">
