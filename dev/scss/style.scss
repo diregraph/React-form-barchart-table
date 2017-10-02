@@ -101,6 +101,21 @@ input:not([type]) {
 	}
 }
 
+input[type="checkbox"]{
+	.liveUpdateCheck{
+		float: right;
+		margin-right: 40%;
+	}
+
+}
+
+a{
+	.liveUpdateCheck{
+		margin-right: 50%;
+	}
+
+}
+
 select {
 	border-radius: 0;
 	height: 2rem;
