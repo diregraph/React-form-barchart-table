@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 class BarChart extends Component {
     render(){
         let self = this,
             data = this.props.barChartData.data,
-            colors = this.props.barChartData.colors,
-            label = this.props.barChartData.label,
+            colors = ['#F44336', '#673AB7', '#03A9F4', '#4CAF50', '#607D8B','#FF5722'],
+            label = ['A','B','C','D','E','F']   ,
             max = 0;
 
         for (let i = data.length; i--; ) {
