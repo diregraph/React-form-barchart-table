@@ -1,11 +1,12 @@
 import {combineReducers} from 'redux';
 import formReducer from './reducer-form';
-import barChartReducer from './reducer-bar-chart'
-
+import liveUpdateCheckboxreducer from './reducer-liveupdate-checkbox';
+// import formDataReducer from './reducer-form-data'
 
 const allReducers = combineReducers({
     formItems : formReducer,
-    barChartData : barChartReducer
+    liveUpdateCheckValue : liveUpdateCheckboxreducer
+
 });
 
 export default allReducers;

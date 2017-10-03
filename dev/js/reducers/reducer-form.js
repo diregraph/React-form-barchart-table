@@ -1,34 +1,60 @@
-export default function () {
-    return [
-        {
-            id: 1,
-            type: "A",
-            amount: 10
-        },
-        {
-            id: 2,
-            type: "B",
-            amount: 15
-        },
-        {
-            id: 3,
-            type: "C",
-            amount: 20
-        },
-        {
-            id: 4,
-            type: "D",
-            amount: 10
-        },
-        {
-            id: 5,
-            type: "E",
-            amount: 5
-        },
-        {
-            id: 6,
-            type: "F",
-            amount: 15
-        }
-    ]
+export default function (state={
+                                id:[1,2,3,4,5,6],
+                                type:["A","B","C","D","E","F"],
+                                amount:[0,0,0,0,0,0],
+                                liveupdate:true,
+                                newStateAmount:[0,0,0,0,0,0]
+                                },action) {
+    switch(action.type){
+        case "RESET_BUTTON_CLICKED":
+            return{
+                id:[1,2,3,4,5,6],
+                type:["A","B","C","D","E","F"],
+                amount:[0,0,0,0,0,0],
+                liveupdate:true,
+                newStateAmount:[0,0,0,0,0,0]
+            };
+            break;
+
+        case"INPUT_FIELD_CHANGED":
+            let inputFieldID = action.payload.id;
+            let inputFieldValue = action.payload.value;
+            //console.log(typeof inputFieldValue);
+            let newStateAmountArr = [];
+            state.id.map((id)=>{
+                if(id === inputFieldID){
+                    newStateAmountArr.push(parseInt(inputFieldValue));
+                }else{
+                    newStateAmountArr.push(parseInt(state.newStateAmount[id-1]));
+                }
+            });
+            if(action.payload.liveupdate){
+                return {
+                    id:[1,2,3,4,5,6],
+                    type:["A","B","C","D","E","F"],
+                    amount:newStateAmountArr,
+                    liveupdate:action.payload.liveupdate,
+                    newStateAmount:newStateAmountArr
+                };
+            }else{
+                return {
+                    id:[1,2,3,4,5,6],
+                    type:["A","B","C","D","E","F"],
+                    amount:state.amount,
+                    liveupdate:action.payload.liveupdate,
+                    newStateAmount:newStateAmountArr
+                };
+            }
+        case "SUBMIT_BUTTON_CLICKED":
+            return {
+                id:[1,2,3,4,5,6],
+                type:["A","B","C","D","E","F"],
+                amount:state.newStateAmount,
+                liveupdate:action.payload.liveupdate,
+                newStateAmount:state.newStateAmount
+            };
+            break;
+        default:
+            return state
+    }
 }

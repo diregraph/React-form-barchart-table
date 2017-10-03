@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 class BarChart extends Component {
     render(){
         let self = this,
-            data = this.props.barChartData.data,
-            colors = this.props.barChartData.colors,
-            label = this.props.barChartData.label,
+            data = this.props.barChartData,
+            colors = ['#F44336', '#673AB7', '#03A9F4', '#4CAF50', '#607D8B','#FF5722'],
+            label = ['A','B','C','D','E','F'],
             max = 0;
 
         for (let i = data.length; i--; ) {
@@ -16,13 +15,17 @@ class BarChart extends Component {
             }
         }
 
-
         return (
             <div className="Charts">
                 { data.map((item, itemIndex) => {
-                    var color = colors[itemIndex],
+                    let color = colors[itemIndex],
                         style,
-                        size = item /max * 100;
+                        size;
+                    if(max === 0){
+                        size = item / 1 * 100;
+                    }else{
+                        size = item / max * 100;
+                    }
                     style = {
                         backgroundColor: color,
                     };
@@ -54,7 +57,7 @@ class BarChart extends Component {
 
 function mapStateToProps(state) {
     return {
-        barChartData : state.barChartData
+        barChartData : state.formItems.amount
     };
 }
 

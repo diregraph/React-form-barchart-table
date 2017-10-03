@@ -1,39 +1,92 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import submitForm from "../actions/btn-submit-action";
+import resetForm from "../actions/btn-reset-action";
+import inputFieldChange from "../actions/input-field-change-action"
+import SubmitButton from '../components/btn-submit';
+import ResetButton from '../components/btn-reset';
+import {liveUpdateCheckboxCheck, liveUpdateCheckboxUncheck } from "../actions/live-update-checkbox-action";
+
+
+
 
 
 class Form extends Component {
+    constructor(props){
+        super(props);
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
 
-    createFormItems(){
-        return this.props.formItems.map((formItem) =>{
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name === 'liveUpdateCheck' ? target.name : parseInt(target.name);
+
+        if(name === 'liveUpdateCheck'){
+            if(value){
+                this.props.liveUpdateCheckBoxCheck(value)
+            }else{
+                this.props.liveUpdateCheckBoxUncheck(value)
+            }
+        }else{
+            this.props.inputFieldChange({id:name,value:value,liveupdate:this.props.liveUpdateCheckValue.checked});
+        }
+    }
+
+
+    createFormItems(count){
+        return this.props.formItems.id.map((formItemID) =>{
+            count++;
             return (
-                <div key={formItem.id} className="formItemContainer">
-                    <label>{formItem.type}</label>
-                    <input defaultValue={formItem.amount} type="text"/>
+                <div key={formItemID} className="formItemContainer">
+                    <label>{this.props.formItems.type[count-1]}</label>
+                    <input name={formItemID}
+                           value={this.props.formItems.newStateAmount[count-1]}
+                           type="number"
+                           onChange={this.handleInputChange} />
                 </div>
             );
+
         });
     }
 
     render() {
         return(
             <div>
+                <form>
+                    {this.createFormItems(0)}
+                </form>
                 <div>
-                    {this.createFormItems()}
+                    <a>Live Update?</a>
+                    <input
+                        name="liveUpdateCheck"
+                        type="checkbox"
+                        checked={this.props.liveUpdateCheckValue.checked}
+                        onChange={this.handleInputChange}
+                        className="liveUpdateCheck" />
                 </div>
-                <button> Submit </button>
-                <button> Reset </button>
+                <SubmitButton submitAction ={() => this.props.submitForm({liveupdate:this.props.liveUpdateCheckValue.checked})} />
+                <ResetButton resetAction ={() => this.props.resetForm()}/>
             </div>
 
         );
     }
 }
 
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({submitForm: submitForm,
+                               resetForm: resetForm,
+                               inputFieldChange: inputFieldChange,
+                               liveUpdateCheckBoxCheck:liveUpdateCheckboxCheck,
+                               liveUpdateCheckBoxUncheck:liveUpdateCheckboxUncheck }, dispatch)
+}
+
 function mapStateToProps(state) {
     return {
-        formItems : state.formItems
+        formItems : state.formItems,
+        liveUpdateCheckValue : state.liveUpdateCheckValue
     };
 }
 
-export default connect(mapStateToProps)(Form);
+export default connect(mapStateToProps,matchDispatchToProps)(Form);
