@@ -3,7 +3,8 @@ export default function (state={
                                 type:["A","B","C","D","E","F"],
                                 amount:[0,0,0,0,0,0],
                                 liveupdate:true,
-                                newStateAmount:[0,0,0,0,0,0]
+                                newStateAmount:[0,0,0,0,0,0],
+                                alert:"non"
                                 },action) {
     switch(action.type){
         case "RESET_BUTTON_CLICKED":
@@ -12,7 +13,8 @@ export default function (state={
                 type:["A","B","C","D","E","F"],
                 amount:[0,0,0,0,0,0],
                 liveupdate:true,
-                newStateAmount:[0,0,0,0,0,0]
+                newStateAmount:[0,0,0,0,0,0],
+                alert:"reset"
             };
             break;
 
@@ -34,7 +36,8 @@ export default function (state={
                     type:["A","B","C","D","E","F"],
                     amount:newStateAmountArr,
                     liveupdate:action.payload.liveupdate,
-                    newStateAmount:newStateAmountArr
+                    newStateAmount:newStateAmountArr,
+                    alert:"non"
                 };
             }else{
                 return {
@@ -42,7 +45,8 @@ export default function (state={
                     type:["A","B","C","D","E","F"],
                     amount:state.amount,
                     liveupdate:action.payload.liveupdate,
-                    newStateAmount:newStateAmountArr
+                    newStateAmount:newStateAmountArr,
+                    alert:"non"
                 };
             }
         case "SUBMIT_BUTTON_CLICKED":
@@ -51,7 +55,8 @@ export default function (state={
                 type:["A","B","C","D","E","F"],
                 amount:state.newStateAmount,
                 liveupdate:action.payload.liveupdate,
-                newStateAmount:state.newStateAmount
+                newStateAmount:state.newStateAmount,
+                alert:"submit"
             };
             break;
         default:

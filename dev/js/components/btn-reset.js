@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class ResetButton extends Component {
     render() {
         return(
-            <button onClick={this.props.resetAction}> Reset </button>
+            <button className="btn btn-danger" onClick={this.props.resetAction}> Reset </button>
         );
     }
 

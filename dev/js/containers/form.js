@@ -9,9 +9,6 @@ import ResetButton from '../components/btn-reset';
 import {liveUpdateCheckboxCheck, liveUpdateCheckboxUncheck } from "../actions/live-update-checkbox-action";
 
 
-
-
-
 class Form extends Component {
     constructor(props){
         super(props);
@@ -40,20 +37,43 @@ class Form extends Component {
             count++;
             return (
                 <div key={formItemID} className="formItemContainer">
-                    <label>{this.props.formItems.type[count-1]}</label>
+                    <h5><span className="badge badge-secondary">{this.props.formItems.type[count-1]}</span></h5>
                     <input name={formItemID}
                            value={this.props.formItems.newStateAmount[count-1]}
                            type="number"
-                           onChange={this.handleInputChange} />
+                           onChange={this.handleInputChange}/>
                 </div>
             );
 
         });
     }
 
+    static showAlert(alertType){
+        if(alertType === "submit"){
+            return (
+                <div className="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Barchart Rendered!</strong>
+                </div>
+            );
+        }else if(alertType === "reset"){
+            return (
+                <div className="alert alert-info alert-dismissible fade show" role="alert">
+                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <strong>Barchart Reset!</strong>
+                </div>
+            );
+        }
+    }
+
     render() {
         return(
             <div>
+                {Form.showAlert(this.props.formItems.alert)}
                 <form>
                     {this.createFormItems(0)}
                 </form>
