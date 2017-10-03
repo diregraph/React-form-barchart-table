@@ -14,9 +14,6 @@ class BarChart extends Component {
                 max = data[i];
             }
         }
-        console.log(data);
-        console.log(max);
-
 
         return (
             <div className="Charts">
