@@ -29,7 +29,7 @@ class Form extends Component {
                 this.props.liveUpdateCheckBoxUncheck(value)
             }
         }else{
-            this.props.inputFieldChange({id:name,value:value});
+            this.props.inputFieldChange({id:name,value:value,liveupdate:this.props.liveUpdateCheckValue.checked});
         }
     }
 
@@ -40,7 +40,10 @@ class Form extends Component {
             return (
                 <div key={formItemID} className="formItemContainer">
                     <label>{this.props.formItems.type[count-1]}</label>
-                    <input name={formItemID} value={this.props.formItems.amount[count-1]} type="number" onChange={this.handleInputChange} />
+                    <input name={formItemID}
+                           value={this.props.formItems.newStateAmount[count-1]}
+                           type="number"
+                           onChange={this.handleInputChange} />
                 </div>
             );
 
@@ -55,10 +58,15 @@ class Form extends Component {
                 </form>
                 <div>
                     <a>Live Update?</a>
-                    <input name="liveUpdateCheck"type="checkbox" checked={this.props.liveUpdateCheckValue.checked} onChange={this.handleInputChange} className="liveUpdateCheck" />
+                    <input
+                        name="liveUpdateCheck"
+                        type="checkbox"
+                        checked={this.props.liveUpdateCheckValue.checked}
+                        onChange={this.handleInputChange}
+                        className="liveUpdateCheck" />
                 </div>
-                <SubmitButton submitAction ={() => this.props.submitForm([5,1,4,5,3,1])} />
-                <ResetButton resetAction ={() => this.props.resetForm([0,0,0,0,0,0])}/>
+                <SubmitButton submitAction ={() => this.props.submitForm({liveupdate:this.props.liveUpdateCheckValue.checked})} />
+                <ResetButton resetAction ={() => this.props.resetForm()}/>
             </div>
 
         );

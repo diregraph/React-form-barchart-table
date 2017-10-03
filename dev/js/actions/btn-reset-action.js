@@ -1,8 +1,6 @@
-const resetForm = (formData) => {
-    console.log('clicked reset button');
+const resetForm = () => {
     return {
-        type: 'RESET_BUTTON_CLICKED',
-        payload: formData
+        type: 'RESET_BUTTON_CLICKED'
     }
 };
 

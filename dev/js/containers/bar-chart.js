@@ -6,7 +6,7 @@ class BarChart extends Component {
         let self = this,
             data = this.props.barChartData,
             colors = ['#F44336', '#673AB7', '#03A9F4', '#4CAF50', '#607D8B','#FF5722'],
-            label = ['A','B','C','D','E','F']   ,
+            label = ['A','B','C','D','E','F'],
             max = 0;
 
         for (let i = data.length; i--; ) {
@@ -14,6 +14,8 @@ class BarChart extends Component {
                 max = data[i];
             }
         }
+        console.log(data);
+        console.log(max);
 
 
         return (
@@ -21,7 +23,12 @@ class BarChart extends Component {
                 { data.map((item, itemIndex) => {
                     let color = colors[itemIndex],
                         style,
+                        size;
+                    if(max === 0){
+                        size = item / 1 * 100;
+                    }else{
                         size = item / max * 100;
+                    }
                     style = {
                         backgroundColor: color,
                     };
