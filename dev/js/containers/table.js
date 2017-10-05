@@ -1,42 +1,26 @@
 import React, {Component} from 'react';
-import contacts from '../components/contacs';
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
+import {fetchAddressBookIfNeeded} from "../actions/address-book-loading-action";
+
 
 class Table extends Component {
 
-    addressBookLoad(url) {
-        return new Promise((resolve, reject) => {
-            const xhttpr = new XMLHttpRequest();
-            xhttpr.open("GET", url, true);
-            xhttpr.onload = function () {
-                if (xhttpr.status === 200 && xhttpr.readyState) {
-                    resolve(xhttpr.responseText);
-                } else {
-                    reject(Error('JSON didn\'t load successfully; error code:' + xhttpr.statusText));
-                }
-            };
-
-            xhttpr.onerror = function () {
-                reject(Error('There was a network error.'));
-            };
-            xhttpr.send();
-        })
-
+    componentDidMount() {
+        this.props.fetchAddressBookIfNeeded('http://address-book-demo.herokuapp.com/api/contacts');
     }
 
 
-    getNames(contacts) {
-        let constactsJSON = this.addressBookLoad("http://address-book-demo.herokuapp.com/api/contacts").then(JSON.parse).catch(
-            (error) => {
-                console.log(error);
-            }
-        );
-
+    getNames() {
         let contactsArr = [];
         let count = 1;
-        contacts.contacts.map((contact) => {
-            contactsArr.push({id: count, name: contact.name, email: contact.email, company: contact.company});
-            count++;
-        });
+        if (this.props.addressBook.items !== []) {
+            this.props.addressBook.items.map((contact) => {
+                contactsArr.push({id: count, name: contact.name, email: contact.email, company: contact.company});
+                count++;
+            });
+        }
+
         return contactsArr;
 
 
@@ -64,7 +48,13 @@ class Table extends Component {
                     </tr>
                     </thead>
                     <tbody>
-                    {this.getNames(contacts).map((contact) => {
+                    {this.props.addressBook.isFetching &&
+                    <tr>
+                        <div className="loader"></div>
+                    </tr>
+                    }
+                    {!this.props.addressBook.isFetching &&
+                    this.getNames().map((contact) => {
                         return (
                             <tr key={contact.id}>
                                 <th scope="row">{contact.id}</th>
@@ -73,7 +63,8 @@ class Table extends Component {
                                 <td>{contact.company}</td>
                             </tr>
                         )
-                    })}
+                    })
+                    }
                     </tbody>
                 </table>
             </div>
@@ -81,5 +72,16 @@ class Table extends Component {
     }
 }
 
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({
+        fetchAddressBookIfNeeded: fetchAddressBookIfNeeded
+    }, dispatch)
+}
 
-export default Table;
+function mapStateToProps(state) {
+    return {
+        addressBook: state.addressBook
+    };
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(Table);
