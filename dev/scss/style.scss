@@ -16,7 +16,20 @@ $color-primary: #1695A3;
 }
 
 div {
-	.halfContainer {
+	.app-container{
+		width: 1500px;
+		height:700px;
+	}
+	.halfContainer-right {
+		float: right;
+		display: inline-block;
+		width: 50%;
+		height:100%;
+
+	}
+
+	.halfContainer-left {
+		float: left;
 		display: inline-block;
 		width: 50%;
 		height:100%;
@@ -30,6 +43,17 @@ div {
 
 	.componentContainer{
 		border: 1px solid $color-border;
+		margin: 1%;
+		text-align:center;
+	}
+	.componentContainer-table{
+		border: 1px solid $color-border;
+		margin: 1%;
+		text-align:center;
+		height: 686px;
+	}
+
+	.tableComponentContainer{
 		margin: 1%;
 		text-align:center;
 	}

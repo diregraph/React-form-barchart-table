@@ -1,15 +1,16 @@
+export const LIVE_UPDATE_UNCHECKED = 'LIVE_UPDATE_UNCHECKED';
+export const LIVE_UPDATE_CHECKED = 'LIVE_UPDATE_CHECKED';
+
 export const liveUpdateCheckboxUncheck = (checked) => {
-    //console.log('unchecked');
     return {
-        type: 'LIVE_UPDATE_UNCHECKED',
+        type: LIVE_UPDATE_UNCHECKED,
         payload: checked
     }
 };
 
 export const liveUpdateCheckboxCheck = (checked) => {
-    //console.log('checked');
     return {
-        type: 'LIVE_UPDATE_CHECKED',
+        type: LIVE_UPDATE_CHECKED,
         payload: checked
     }
 };

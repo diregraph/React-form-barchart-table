@@ -1,27 +1,27 @@
 import React from 'react';
 import Form from '../containers/form';
 import BarChart from '../containers/bar-chart';
-import AddressBook from './address-book'
+import Table from '../containers/table';
 
 require('../../scss/style.scss');
 
 const App = () => (
-    <div>
-        <div className="halfContainer">
+    <div className="app-container">
+        <div className="halfContainer-left">
             <div className="componentContainer">
-                <h2>Form</h2>
-                <Form />
+                <h3>Form</h3>
+                <Form/>
             </div>
 
             <div className="componentContainer">
-                <h2>Bar Chart</h2>
-                <BarChart />
+                <h3>Bar Chart</h3>
+                <BarChart/>
             </div>
         </div>
-        <div className="halfContainer">
-            <div className="componentContainer">
-                <h2>Table</h2>
-                {/*<AddressBook />*/}
+        <div className="halfContainer-right">
+            <div className="componentContainer-table">
+                <h3>Table</h3>
+                <Table/>
             </div>
         </div>
     </div>
