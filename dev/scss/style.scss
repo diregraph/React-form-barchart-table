@@ -101,7 +101,14 @@ div {
     }
   }
 
+  .loader-container {
+    position: relative;
+    height: 300px;
+  }
   .loader {
+    position: absolute;
+    top: 50%;
+    left: 40%;
     align-self: center;
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */

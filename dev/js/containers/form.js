@@ -31,7 +31,6 @@ class Form extends Component {
         }
     }
 
-
     createFormItems(count) {
         return this.props.formItems.id.map((formItemID) => {
             count++;

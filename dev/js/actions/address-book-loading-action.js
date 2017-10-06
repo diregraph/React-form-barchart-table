@@ -12,8 +12,10 @@ export const RECEIVE_ADDRESSBOOK = 'RECEIVE_ADDRESSBOOK';
 
 function receiveAddressBook(json) {
     let jsonDataArr = [];
+    let count = 1;
     for (let i = 0; i < json.contacts.length; i++) {
-        jsonDataArr.push(json.contacts[i]);
+        jsonDataArr.push({id:count,contactData:json.contacts[i]});
+        count++;
     }
     return {
         type: RECEIVE_ADDRESSBOOK,
@@ -37,6 +39,7 @@ function fetchAddressBook(url) {
         return fetch(url)
             .then(response => response.json())
             .then(json => dispatch(receiveAddressBook(json)))
+            .catch(error => console.log(error) )
     }
 }
 
