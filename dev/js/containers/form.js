@@ -6,7 +6,9 @@ import {resetForm} from "../actions/btn-reset-action";
 import {inputFieldChange} from "../actions/input-field-change-action";
 import SubmitButton from '../components/btn-submit';
 import ResetButton from '../components/btn-reset';
+import AlertDismissable from '../components/alert';
 import {liveUpdateCheckboxCheck, liveUpdateCheckboxUncheck} from "../actions/live-update-checkbox-action";
+import {alertDissmiss, alertShow} from "../actions/show-alert-action";
 
 
 class Form extends Component {
@@ -47,34 +49,11 @@ class Form extends Component {
         });
     }
 
-    showAlert(alertType) {
-        if (alertType === "submit") {
-            return (
-                <div className="alert alert-success alert-dismissible fade show" role="alert">
-                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <strong>Barchart Rendered!</strong>
-                </div>
-            );
-        } else if (alertType === "reset") {
-            return (
-                <div className="alert alert-info alert-dismissible fade show" role="alert">
-                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <strong>Barchart Reset!</strong>
-                </div>
-            );
-        }
-    }
-
     render() {
         return (
             <div>
-                {/*<div>
-                    {this.showAlert(this.props.formItems.alert)}
-                </div>*/}
+                <AlertDismissable
+                    alertDissmiss={this.props.alertDissmiss}/>
 
                 <form>
                     {this.createFormItems(0)}
@@ -103,14 +82,16 @@ function matchDispatchToProps(dispatch) {
         resetForm: resetForm,
         inputFieldChange: inputFieldChange,
         liveUpdateCheckBoxCheck: liveUpdateCheckboxCheck,
-        liveUpdateCheckBoxUncheck: liveUpdateCheckboxUncheck
+        liveUpdateCheckBoxUncheck: liveUpdateCheckboxUncheck,
+        alertDissmiss: alertDissmiss,
+        alertShow: alertShow
     }, dispatch)
 }
 
 function mapStateToProps(state) {
     return {
         formItems: state.formItems,
-        liveUpdateCheckValue: state.liveUpdateCheckValue
+        liveUpdateCheckValue: state.liveUpdateCheckValue,
     };
 }
 

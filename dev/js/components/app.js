@@ -8,6 +8,9 @@ require('../../scss/style.scss');
 const App = () => (
     <div className="app-container">
         <div className="halfContainer-left">
+            {/*<div className="componentContainer">
+                sdfg
+            </div>*/}
             <div className="componentContainer">
                 <h3>Form</h3>
                 <Form/>
